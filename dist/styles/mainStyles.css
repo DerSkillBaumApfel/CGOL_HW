@@ -1,0 +1,19 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden; }
+
+.backgroundImage {
+  position: fixed;
+  width: 105%;
+  height: 105%;
+  z-index: -2;
+  padding: 0px;
+  margin: 0px;
+  top: 0; }
+
+.backgroundImageLayer {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: -1; }

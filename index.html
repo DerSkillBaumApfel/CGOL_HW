@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <title>Conway's game of life - by Moe</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./dist/styles/mainStyles.css" />
+
+    <script src="./dist/scripts/cgol.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <template id="cgolTemplate">
+            <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="./dist/styles/cgolStyles.css" />
+
+            <div id="configContainer" class="container-fluid mx-auto px-auto pb-2 card">
+                    <div class="row col-12 pt-1">
+                        <form class="mx-auto">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <label for="widthForm">Width</label>
+                                    <input type="number" class="form-control mb-2" id="widthBox" min="1" max="400" value="60">
+                                </div>
+                                <div class="col-auto">
+                                        <button id="confirmButton" type="button" class="controlButton btn btn-primary mb-2">Set Size</button>
+                                    </div>
+                                <div class="col-auto">
+                                    <label for="heightForm">Height</label>
+                                    <input type="number" class="form-control mb-2" id="heightBox" min="1" max="400" value="25">
+                                </div>
+ 
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row col-12 pt-2">
+                        <div class="mx-auto">
+                            <button type="button" class="controlButton btn btn-success d-inline" id="startButton">Start game</button>
+                            <button type="button" class="controlButton btn btn-danger d-inline" id="stopButton" disabled>Stop game</button>
+                            <button type="button" class="controlButton btn btn-warning d-inline" id="clearButton">Clear grid</button>
+                        </div>
+                    </div>
+            </div>
+                
+            <div class="container-fluid">
+                <div class="row col-12 pt-2">
+                    <h3 class="mx-auto"><span id="stepCounter" class="badge badge-secondary"></span></h3>
+                </div>
+                <div id="container" class="row col-12 mt-2 d-block mx-auto px-auto">    
+                </div>
+            </div>
+
+            <div class="container-fluid mx-auto px-auto mt-5">
+                <div class="row">
+                    <div class="col-2">
+                        <!-- Spacer Div -->
+                    </div>
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header">
+                                    <h2> Level markup zone:</h2>
+                            </div>
+                            <div class="card-body">
+                                <textarea id="levelDesignZone" class="form-control mx-auto px-auto" rows="10"></textarea>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="d-inline">
+                                0 = dead cell 
+                                </br>
+                                1 = living cell
+                                </br>
+                                X = random state
+                                </br>
+                                Not defined tiles will be filled with 0.
+                                </div>
+
+                                <button type="button" class="btn btn-primary d-inline float-right" id="levelLoadButton"> Load Level</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                            <!-- Spacer Div -->
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <img class="backgroundImage" src="https://thumbs.gfycat.com/UnfoldedRedJaguarundi-size_restricted.gif" alt="backgroundImage">
+
+        <ul id="scene" data-relative-input="true">
+            <li class="layer" data-depth="0.6">
+                <img class="backgroundImageLayer" src="./dist/assets/dots.png" alt="backgroundImageParallaxLayer">
+            </li>
+        </ul>
+
+        <div class="container-fluid mx-auto px-auto">
+            <div class="row col-12 mx-auto d-flex">
+                <header class="mx-auto">
+                    <h1>Conway's game of life</h1>
+                </header>
+            </div>
+        </div>
+
+        <cgol-pitch id="pitchShadow" width="60" height="25" class="w-100"></cgol-pitch>
+
+
+        <br>
+
+        <script src="./node_modules/parallax-js/dist/parallax.min.js"></script>
+        <script>
+            var scene = document.getElementById('scene');
+            var parallaxInstance = new Parallax(scene);
+        </script>
+    </main>
+
+</body>
+
+</html>
