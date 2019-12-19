@@ -1,11 +1,36 @@
+:host {
+  --primary-color: #87ceeb;
+  --secondary-color: #cecece;
+  --font-color: #424242;
+  --transparent-bg-color: #87cfeb99;
+  --grid-color: #808080; }
+
+:host-context([data-theme="dark"]) {
+  --primary-color: #460808;
+  --secondary-color: #300404;
+  --font-color: #c0c0c0;
+  --transparent-bg-color: #94343499;
+  --grid-color: #353535; }
+
 #configContainer {
-  background-color: rgba(135, 206, 235, 0.6); }
+  background-color: var(--transparent-bg-color); }
   @media (max-device-width: 1024px) {
     #configContainer {
       width: 60%; } }
   @media (min-device-width: 1025px) {
     #configContainer {
       width: 35%; } }
+
+label,
+button,
+div {
+  color: var(--font-color); }
+
+.bg-standard {
+  background-color: var(--secondary-color); }
+
+.bg-lightened {
+  background-color: var(--transparent-bg-color); }
 
 #container {
   font-size: 0;
@@ -20,15 +45,20 @@
   vertical-align: top;
   margin-top: 0px; }
 
+#notificationAlert {
+  position: absolute;
+  padding-top: 0.1vh;
+  z-index: 500; }
+
 .gridDiv {
   margin: 0px;
   padding: 0px;
   width: 25px;
   height: 25px;
   border-style: solid;
-  border-color: black;
+  border-color: var(--shadow-color);
   border-width: 1px;
-  background-color: grey; }
+  background-color: var(--grid-color); }
 
 .controlButton {
   margin: 0px 15px 0px 0px;

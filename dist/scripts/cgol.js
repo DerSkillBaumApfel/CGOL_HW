@@ -7,13 +7,20 @@ class CgolGameLogic {
         this.height = height;
         var container = document.querySelector('#pitchShadow');
         this.shadowDOM = container.shadowRoot;
+        // Button and event subscriptions happening here
         this.shadowDOM.querySelector("#stepCounter").innerText = "Steps made: 0";
         this.shadowDOM.querySelector("#clearButton").addEventListener("click", (e) => this.clearGrid());
         this.shadowDOM.querySelector("#startButton").addEventListener("click", (e) => this.startClick());
         this.shadowDOM.querySelector("#stopButton").addEventListener("click", (e) => this.stopGame());
         this.shadowDOM.querySelector("#confirmButton").addEventListener("click", (e) => this.updateDimensions());
         this.shadowDOM.querySelector("#levelLoadButton").addEventListener("click", (e) => this.parseLevelDefinition());
-        window.addEventListener("resize", (e) => this.genDivs());
+        this.previousWindowWidth = window.screen.width;
+        window.addEventListener("resize", (e) => {
+            if (this.previousWindowWidth != window.screen.width) {
+                this.genDivs();
+                this.previousWindowWidth = window.screen.width;
+            }
+        });
     }
     updateDimensions() {
         let newW = parseInt(this.shadowDOM.querySelector('#widthBox').value);
@@ -24,10 +31,8 @@ class CgolGameLogic {
     }
     availWidthWithOffset() {
         var containerSize = window.screen.availWidth;
-        console.log("CONTAINER: " + containerSize);
         // approximate rounding
         var res = Math.floor(containerSize - (containerSize * 0.05));
-        console.log(res);
         return res;
     }
     genDivs() {
@@ -41,16 +46,17 @@ class CgolGameLogic {
             // get equally scaled dimensions for height and width
             // change divsize only if it is in reasonable scale range
             this.divDimension = Math.floor((this.availWidthWithOffset() / (this.width)));
-            console.log(this.divDimension);
         }
         else {
             if (!(Math.floor((this.availWidthWithOffset() / (this.width))) >= 5)) {
                 sizeOk = false;
-                alert("Cell density too high for screen size! Use less cells or increase resolution.");
+                this.customAlert("Cell density too high for screen size! \n Use less cells or increase resolution.");
+                // alert("Cell density too high for screen size! Use less cells or increase resolution.");
             }
             if (!(this.width >= 10 && this.height >= 10)) {
                 sizeOk = false;
-                alert("The game field needs to be atleast 10x10!");
+                this.customAlert("The game field needs to be atleast 10x10!");
+                // alert("The game field needs to be atleast 10x10!");
             }
         }
         if (sizeOk) {
@@ -85,6 +91,11 @@ class CgolGameLogic {
             }
         }
     }
+    customAlert(message) {
+        // -> ts-ignore is only here, because typescript didn't recognize the cdn linked jquery lib.
+        //@ts-ignore
+        $.notify(message, "error");
+    }
     changeColorOnMouseEnter(e) {
         if (!this.gameRunning) {
             e = e || window.event;
@@ -118,7 +129,7 @@ class CgolGameLogic {
             this.virtualGameboard[xCoordinate][yCoordinate] = 0;
             element.setAttribute("isMarked", "false");
             if (creationPhase) {
-                element.style.backgroundColor = "grey";
+                element.style.backgroundColor = "var(--grid-color)";
             }
             else {
                 element.style.backgroundColor = "rgb(144,159,255)";
@@ -160,7 +171,7 @@ class CgolGameLogic {
         var stateChangingCells = new Array();
         // y is inside x
         // first height second width
-        console.log("x length" + this.virtualGameboard[1].length + " y length" + this.virtualGameboard.length);
+        // console.log("x length" + this.virtualGameboard[1].length + " y length" + this.virtualGameboard.length);
         for (let i = 0; i < this.virtualGameboard.length; i++) {
             for (let j = 0; j < this.virtualGameboard[i].length; j++) {
                 var xCoordinate = i;
@@ -241,6 +252,12 @@ class CgolGameLogic {
         }
         this.width = longestLineLength;
         this.height = inputRows.length;
+        if (this.width < 10) {
+            this.width = 10;
+        }
+        if (this.height < 10) {
+            this.height = 10;
+        }
         this.genDivs();
         for (let height = 0; height < inputRows.length; height++) {
             for (let width = 0; width < inputRows[height].length; width++) {
@@ -254,11 +271,6 @@ class CgolGameLogic {
                 if (value == 1) {
                     this.markElement(width, height);
                 }
-                // }
-                // catch
-                // {
-                //     console.log("Level malformed!");
-                // }
             }
         }
         console.log(this.virtualGameboard);
