@@ -4,8 +4,8 @@
   --shadow-color: #121212;
   --font-color: #383838;
   --transparent-bg-color: #87cfeb99;
-  --light-image-visibility: visible;
-  --dark-image-visibility: hidden; }
+  --light-image-opacity: 100;
+  --dark-image-opacity: 0; }
 
 [data-theme="dark"] {
   --primary-color: #460808;
@@ -13,8 +13,8 @@
   --shadow-color: #121212;
   --font-color: #c0c0c0;
   --transparent-bg-color: #6b262699;
-  --light-image-visibility: hidden;
-  --dark-image-visibility: visible; }
+  --light-image-opacity: 0;
+  --dark-image-opacity: 100; }
 
 body {
   padding: 0px;
@@ -46,7 +46,7 @@ h1 {
   padding: 0px;
   margin: 0px;
   top: 0;
-  visibility: var(--light-image-visibility); }
+  opacity: var(--light-image-opacity); }
 
 .backgroundImageLayerLight {
   position: absolute;
@@ -55,7 +55,7 @@ h1 {
   height: 2056px;
   width: 3840px;
   z-index: -1;
-  visibility: var(--light-image-visibility); }
+  opacity: var(--light-image-opacity); }
 
 .backgroundImageDark {
   position: fixed;
@@ -65,7 +65,7 @@ h1 {
   padding: 0px;
   margin: 0px;
   top: 0;
-  visibility: var(--dark-image-visibility); }
+  opacity: var(--dark-image-opacity); }
 
 .backgroundImageLayerDark {
   position: absolute;
@@ -74,7 +74,7 @@ h1 {
   height: 2056px;
   width: 3840px;
   z-index: -1;
-  visibility: var(--dark-image-visibility); }
+  opacity: var(--dark-image-opacity); }
 
 .themeSwitch {
   background-color: var(--transparent-bg-color);
