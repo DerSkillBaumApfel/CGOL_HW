@@ -1,9 +1,9 @@
 :root {
-  --primary-color: #87ceeb;
-  --secondary-color: #cecece;
-  --shadow-color: #121212;
-  --font-color: #383838;
-  --transparent-bg-color: #87cfeb99;
+  --primary-color: rgb(135, 206, 235);
+  --secondary-color: rgb(206, 206, 206);
+  --shadow-color: rgb(18, 18, 18);
+  --font-color: rgb(56, 56, 56);
+  --transparent-bg-color: rgba(135, 207, 235, 0.6);
   --light-image-opacity: 100;
   --dark-image-opacity: 0; }
 
