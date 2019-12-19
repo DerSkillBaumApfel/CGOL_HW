@@ -1,22 +1,22 @@
 :host {
-  --primary-color: #87ceeb;
-  --secondary-color: #cecece;
-  --font-color: #424242;
-  --transparent-bg-color: #87cfeb99;
-  --grid-color: #808080;
-  --grid-border-color: #121212;
-  --grid-active-color: #242840;
-  --grid-visited-color: #909fff; }
+  --primary-color: rgb(137, 207, 235);
+  --secondary-color: rgb(206, 206, 206);
+  --font-color: rgb(66, 66, 66);
+  --transparent-bg-color: rgba(135, 207, 235, 0.6);
+  --grid-color: rgb(128, 128, 128);
+  --grid-border-color: rgb(18, 18, 18);
+  --grid-active-color: rgb(36, 40, 64);
+  --grid-visited-color: rgb(144, 159, 255); }
 
-:host-context([data-theme="dark"]) {
-  --primary-color: #460808;
-  --secondary-color: #300404;
-  --font-color: #c0c0c0;
-  --transparent-bg-color: #94343499;
-  --grid-color: #505050;
-  --grid-border-color: #121212;
-  --grid-active-color: #571818;
-  --grid-visited-color: #d391b2; }
+:host([data-theme="dark"]) {
+  --primary-color: rgb(70, 8, 8);
+  --secondary-color: rgb(48, 4, 4);
+  --font-color: rgb(192, 192, 192);
+  --transparent-bg-color: rgba(148, 52, 52, 0.6);
+  --grid-color: rgb(80, 80, 80);
+  --grid-border-color: rgb(18, 18, 18);
+  --grid-active-color: rgb(87, 24, 24);
+  --grid-visited-color: rgb(211, 145, 178); }
 
 #configContainer {
   background-color: var(--transparent-bg-color); }
