@@ -25,7 +25,10 @@ class CgolGameLogic {
     availWidthWithOffset() {
         var containerSize = window.screen.availWidth;
         console.log("CONTAINER: " + containerSize);
-        return Math.floor(containerSize - (containerSize * 0.05));
+        // approximate rounding
+        var res = Math.floor(containerSize - (containerSize * 0.05));
+        console.log(res);
+        return res;
     }
     genDivs() {
         // Get container and reset contents
@@ -38,6 +41,7 @@ class CgolGameLogic {
             // get equally scaled dimensions for height and width
             // change divsize only if it is in reasonable scale range
             this.divDimension = Math.floor((this.availWidthWithOffset() / (this.width)));
+            console.log(this.divDimension);
         }
         else {
             if (!(Math.floor((this.availWidthWithOffset() / (this.width))) >= 5)) {
@@ -51,7 +55,7 @@ class CgolGameLogic {
         }
         if (sizeOk) {
             let currentRow = this.shadowDOM.appendChild(document.createElement("div"));
-            currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center";
+            currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center w-100";
             for (let i = 0; i < this.height; i++) {
                 for (let j = 0; j < this.width; j++) {
                     let div = currentRow.appendChild(document.createElement("div"));
@@ -70,7 +74,7 @@ class CgolGameLogic {
                 // jump.setAttribute("LineBreak", "true");
                 container.appendChild(currentRow);
                 currentRow = this.shadowDOM.appendChild(document.createElement("div"));
-                currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center";
+                currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center w-100";
             }
             this.virtualGameboard = new Array(this.width);
             for (let i = 0; i < this.width; i++) {

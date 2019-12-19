@@ -1,6 +1,11 @@
 #configContainer {
-  width: 40%;
   background-color: rgba(135, 206, 235, 0.6); }
+  @media (max-device-width: 1024px) {
+    #configContainer {
+      width: 60%; } }
+  @media (min-device-width: 1025px) {
+    #configContainer {
+      width: 35%; } }
 
 #container {
   font-size: 0;
