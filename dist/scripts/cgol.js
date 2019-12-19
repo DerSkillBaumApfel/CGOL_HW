@@ -246,7 +246,7 @@ class CgolGameLogic {
             for (let width = 0; width < inputRows[height].length; width++) {
                 // try {
                 let value = parseInt(inputRows[height].charAt(width));
-                if (inputRows[height].charAt(width) == "x") {
+                if (inputRows[height].charAt(width).toLowerCase() == "x") {
                     if (this.rand(0, 100) > 50) {
                         this.markElement(width, height);
                     }
