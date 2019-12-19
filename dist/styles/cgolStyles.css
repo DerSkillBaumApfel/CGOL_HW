@@ -3,14 +3,20 @@
   --secondary-color: #cecece;
   --font-color: #424242;
   --transparent-bg-color: #87cfeb99;
-  --grid-color: #808080; }
+  --grid-color: #808080;
+  --grid-border-color: #121212;
+  --grid-active-color: #242840;
+  --grid-visited-color: #909fff; }
 
 :host-context([data-theme="dark"]) {
   --primary-color: #460808;
   --secondary-color: #300404;
   --font-color: #c0c0c0;
   --transparent-bg-color: #94343499;
-  --grid-color: #353535; }
+  --grid-color: #505050;
+  --grid-border-color: #121212;
+  --grid-active-color: #571818;
+  --grid-visited-color: #d391b2; }
 
 #configContainer {
   background-color: var(--transparent-bg-color); }
@@ -56,7 +62,7 @@ div {
   width: 25px;
   height: 25px;
   border-style: solid;
-  border-color: var(--shadow-color);
+  border-color: var(--grid-border-color);
   border-width: 1px;
   background-color: var(--grid-color); }
 

@@ -26,12 +26,14 @@ class CgolGameLogic {
         });
     }
     remarkElements() {
-        var previousDivs = this.activeDivs;
+        let previousDivs = this.activeDivs;
         this.genDivs();
         if (previousDivs.length > 0) {
-            previousDivs.forEach(combinedCoords => {
-                var parsedWidth = parseInt(combinedCoords.id.split(".")[0]);
-                var parsedHeight = parseInt(combinedCoords.id.split(".")[1]);
+            previousDivs.forEach(div => {
+                let trimmedID = div.id.substr(4, div.id.length - 4);
+                let parsedWidth = parseInt(trimmedID.split(".")[0]);
+                let parsedHeight = parseInt(trimmedID.split(".")[1]);
+                console.log("PW " + parsedWidth + " PH " + parsedHeight);
                 if (parsedWidth < this.width && parsedHeight < this.height) {
                     this.markElement(parsedWidth, parsedHeight);
                 }
