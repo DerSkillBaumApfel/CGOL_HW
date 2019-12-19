@@ -17,22 +17,43 @@ class CgolGameLogic {
         this.previousWindowWidth = window.screen.width;
         window.addEventListener("resize", (e) => {
             if (this.previousWindowWidth != window.screen.width) {
-                this.genDivs();
+                this.remarkElements();
                 this.previousWindowWidth = window.screen.width;
             }
         });
+        window.addEventListener("orientationchange", (e) => {
+            this.remarkElements();
+        });
+    }
+    remarkElements() {
+        var previousDivs = this.activeDivs;
+        this.genDivs();
+        if (previousDivs.length > 0) {
+            previousDivs.forEach(combinedCoords => {
+                var parsedWidth = parseInt(combinedCoords.id.split(".")[0]);
+                var parsedHeight = parseInt(combinedCoords.id.split(".")[1]);
+                if (parsedWidth < this.width && parsedHeight < this.height) {
+                    this.markElement(parsedWidth, parsedHeight);
+                }
+            });
+        }
     }
     updateDimensions() {
         let newW = parseInt(this.shadowDOM.querySelector('#widthBox').value);
         let newH = parseInt(this.shadowDOM.querySelector('#heightBox').value);
-        this.height = newH;
-        this.width = newW;
+        if (newW < 10 || newH < 10) {
+            this.customAlert("Definition must be positive and >= 10!");
+        }
+        else {
+            this.height = newH;
+            this.width = newW;
+        }
         this.genDivs();
     }
     availWidthWithOffset() {
         var containerSize = window.screen.availWidth;
         // approximate rounding
-        var res = Math.floor(containerSize - (containerSize * 0.05));
+        var res = Math.floor(containerSize - (containerSize * 0.1));
         return res;
     }
     genDivs() {
@@ -60,6 +81,7 @@ class CgolGameLogic {
             }
         }
         if (sizeOk) {
+            this.activeDivs = new Array();
             let currentRow = this.shadowDOM.appendChild(document.createElement("div"));
             currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center w-100";
             for (let i = 0; i < this.height; i++) {
@@ -128,17 +150,24 @@ class CgolGameLogic {
         if (this.virtualGameboard[xCoordinate][yCoordinate] == 1) {
             this.virtualGameboard[xCoordinate][yCoordinate] = 0;
             element.setAttribute("isMarked", "false");
+            try {
+                this.activeDivs.splice(this.activeDivs.indexOf(element), 1);
+            }
+            catch (_a) {
+                console.log("Element was not in active div collection.");
+            }
             if (creationPhase) {
                 element.style.backgroundColor = "var(--grid-color)";
             }
             else {
-                element.style.backgroundColor = "rgb(144,159,255)";
+                element.style.backgroundColor = "var(--grid-visited-color)";
             }
         }
         else {
             this.virtualGameboard[xCoordinate][yCoordinate] = 1;
             element.setAttribute("isMarked", "true");
-            element.style.backgroundColor = "rgb(36,40,64)";
+            this.activeDivs.push(element);
+            element.style.backgroundColor = "var(--grid-active-color)";
         }
     }
     startClick() {
