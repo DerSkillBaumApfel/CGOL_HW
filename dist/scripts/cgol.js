@@ -3,7 +3,7 @@ class CgolGameLogic {
     constructor(width, height) {
         this.width = width;
         this.height = height;
-        var container = document.querySelector('#pitchShadow');
+        let container = document.querySelector('#pitchShadow');
         this.shadowDOM = container.shadowRoot;
         // Button and event subscriptions happening here
         this.shadowDOM.querySelector("#stepCounter").innerText = "Steps made: 0";
@@ -53,9 +53,9 @@ class CgolGameLogic {
         this.genDivs();
     }
     availWidthWithOffset() {
-        var containerSize = this.shadowDOM.querySelector("#container").clientWidth;
+        let containerSize = this.shadowDOM.querySelector("#container").clientWidth;
         // approximate rounding
-        var res = Math.floor(containerSize - (containerSize * 0.1));
+        let res = Math.floor(containerSize - (containerSize * 0.1));
         return res;
     }
     genDivs() {
@@ -78,12 +78,10 @@ class CgolGameLogic {
                 sizeOk = false;
                 console.log(Math.floor((this.availWidthWithOffset() / (this.width))));
                 this.customAlert("Cell density too high for screen size! \n Use less cells or increase resolution.");
-                // alert("Cell density too high for screen size! Use less cells or increase resolution.");
             }
             if (!(this.width >= 10 && this.height >= 10)) {
                 sizeOk = false;
                 this.customAlert("The game field needs to be atleast 10x10!");
-                // alert("The game field needs to be atleast 10x10!");
             }
         }
         if (sizeOk) {
@@ -100,11 +98,8 @@ class CgolGameLogic {
                     div.addEventListener("mouseenter", (e) => this.changeColorOnMouseEnter(e));
                     div.addEventListener("mouseleave", (e) => this.changeColorOnMouseLeave(e));
                     div.addEventListener("click", (e) => this.clickElement(e));
-                    // this.shadowDOM.getElementById("container").appendChild(div);
                     currentRow.appendChild(div);
                 }
-                // let jump = this.shadowDOM.createElement("br");
-                // jump.setAttribute("LineBreak", "true");
                 container.appendChild(currentRow);
                 currentRow = this.shadowDOM.appendChild(document.createElement("div"));
                 currentRow.className = "row col-12 mx-0 px-0 d-flex justify-content-center w-100";
@@ -151,7 +146,7 @@ class CgolGameLogic {
         }
     }
     markElement(xCoordinate, yCoordinate, creationPhase = false) {
-        var element = this.shadowDOM.getElementById('tile' + xCoordinate + "." + yCoordinate);
+        let element = this.shadowDOM.getElementById('tile' + xCoordinate + "." + yCoordinate);
         if (this.virtualGameboard[xCoordinate][yCoordinate] == 1) {
             this.virtualGameboard[xCoordinate][yCoordinate] = 0;
             try {
@@ -161,16 +156,16 @@ class CgolGameLogic {
                 console.log("Element was not in active div collection.");
             }
             if (creationPhase) {
-                element.style.backgroundColor = "var(--grid-color)";
+                element.style.backgroundColor = "let(--grid-color)";
             }
             else {
-                element.style.backgroundColor = "var(--grid-visited-color)";
+                element.style.backgroundColor = "let(--grid-visited-color)";
             }
         }
         else {
             this.virtualGameboard[xCoordinate][yCoordinate] = 1;
             this.activeDivs.push(element);
-            element.style.backgroundColor = "var(--grid-active-color)";
+            element.style.backgroundColor = "let(--grid-active-color)";
         }
     }
     startGame() {
@@ -187,8 +182,8 @@ class CgolGameLogic {
         }
     }
     startGameLoop() {
-        var logic = this;
-        var timeout = 200;
+        let logic = this;
+        let timeout = 200;
         setTimeout(function () {
             logic.gameStepCalculationLogic();
             if (logic.gameRunning) {
@@ -199,22 +194,18 @@ class CgolGameLogic {
         }, timeout);
     }
     gameStepCalculationLogic() {
-        //while (this.gameRunning) {
-        var container = this.shadowDOM.getElementById("container");
-        var markedCounter = -1;
-        var stateChangingCells = new Array();
-        // y is inside x
-        // first height second width
-        // console.log("x length" + this.virtualGameboard[1].length + " y length" + this.virtualGameboard.length);
+        let container = this.shadowDOM.getElementById("container");
+        let markedCounter = -1;
+        let stateChangingCells = new Array();
         for (let i = 0; i < this.virtualGameboard.length; i++) {
             for (let j = 0; j < this.virtualGameboard[i].length; j++) {
-                var xCoordinate = i;
-                var yCoordinate = j;
-                var neighbours = 0;
+                let xCoordinate = i;
+                let yCoordinate = j;
+                let neighbours = 0;
                 for (let sideShift = xCoordinate - 1; sideShift <= xCoordinate + 1; sideShift++) {
                     for (let heightShift = yCoordinate - 1; heightShift <= yCoordinate + 1; heightShift++) {
-                        var wrappedxCoord = sideShift;
-                        var wrappedyCoord = heightShift;
+                        let wrappedxCoord = sideShift;
+                        let wrappedyCoord = heightShift;
                         if (sideShift < 0) {
                             wrappedxCoord = this.width - 1;
                         }
@@ -251,8 +242,8 @@ class CgolGameLogic {
         }
         if (stateChangingCells.length > 0) {
             stateChangingCells.forEach(combinedCoords => {
-                var parsedWidth = parseInt(combinedCoords.split(".")[0]);
-                var parsedHeight = parseInt(combinedCoords.split(".")[1]);
+                let parsedWidth = parseInt(combinedCoords.split(".")[0]);
+                let parsedHeight = parseInt(combinedCoords.split(".")[1]);
                 this.markElement(parsedWidth, parsedHeight);
             });
         }
@@ -273,7 +264,7 @@ class CgolGameLogic {
         this.genDivs();
     }
     rand(lowest, highest) {
-        var adjustedHigh = (highest - lowest) + 1;
+        let adjustedHigh = (highest - lowest) + 1;
         return Math.floor(Math.random() * adjustedHigh) + lowest;
     }
     parseLevelDefinition() {
@@ -295,7 +286,6 @@ class CgolGameLogic {
         this.genDivs();
         for (let height = 0; height < inputRows.length; height++) {
             for (let width = 0; width < inputRows[height].length; width++) {
-                // try {
                 let value = parseInt(inputRows[height].charAt(width));
                 if (inputRows[height].charAt(width).toLowerCase() == "x") {
                     if (this.rand(0, 100) > 50) {
@@ -314,17 +304,14 @@ class CgolPitchComponent extends HTMLElement {
     static get observedAttributes() { return ['width', 'height', 'start', 'stop', 'clear']; }
     constructor() {
         super();
-        // let templateContent = template.content;
         const template = document.querySelector("#cgolTemplate");
         let shadowRoot = this.attachShadow({ mode: "open" });
         this.shadowRoot.innerHTML = template.innerHTML;
-        //  (templateContent.cloneNode(true));
     }
     connectedCallback() {
-        // console.log((document.querySelector("#cgolTemplate")).innerHTML);
-        var pitch = this.shadowRoot.host;
-        var width = 60;
-        var height = 25;
+        let pitch = this.shadowRoot.host;
+        let width = 60;
+        let height = 25;
         if (pitch.hasAttribute('width')) {
             width = parseInt(pitch.getAttribute('width'));
         }
