@@ -65,7 +65,7 @@ class CgolGameLogic {
         this.divDimension = 25;
         container.style.width = this.shadowDOM.querySelector("#container").clientWidth + "px";
         let sizeOk = true;
-        if (Math.floor((this.availWidthWithOffset() / (this.width))) >= 5 && this.width >= 10 && this.height >= 10) {
+        if (Math.floor((this.availWidthWithOffset() / (this.width))) >= 3 && this.width >= 10 && this.height >= 10) {
             // get equally scaled dimensions for height and width
             // change divsize only if it is in reasonable scale range
             this.divDimension = Math.floor((this.availWidthWithOffset() / (this.width)));
@@ -74,7 +74,7 @@ class CgolGameLogic {
             }
         }
         else {
-            if (!(Math.floor((this.availWidthWithOffset() / (this.width))) >= 5)) {
+            if (!(Math.floor((this.availWidthWithOffset() / (this.width))) >= 3)) {
                 sizeOk = false;
                 console.log(Math.floor((this.availWidthWithOffset() / (this.width))));
                 this.customAlert("Cell density too high for screen size! \n Use less cells or increase resolution.");
