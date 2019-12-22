@@ -1,6 +1,4 @@
-// window.onload = function (e: Event) {
-//   new CgolGameComponent();
-// }
+// AAAYO
 class CgolGameLogic {
     constructor(width, height) {
         this.width = width;
