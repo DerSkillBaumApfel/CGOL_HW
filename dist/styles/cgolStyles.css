@@ -62,5 +62,14 @@ div {
   background-color: var(--grid-color); }
 
 .controlButton {
-  margin: 0px 15px 0px 0px;
   box-shadow: 0.2rem 0.2rem 0.1rem grey; }
+  @media (max-device-width: 1200px) {
+    .controlButton {
+      display: block;
+      margin-left: auto !important;
+      margin-right: auto !important; } }
+  @media (min-device-width: 1201px) {
+    .controlButton {
+      display: inline;
+      margin-left: auto !important;
+      margin-right: auto !important; } }
