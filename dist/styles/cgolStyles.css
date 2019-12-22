@@ -6,7 +6,8 @@
   --grid-color: rgb(128, 128, 128);
   --grid-border-color: rgb(18, 18, 18);
   --grid-active-color: rgb(36, 40, 64);
-  --grid-visited-color: rgb(144, 159, 255); }
+  --grid-visited-color: rgb(144, 159, 255);
+  width: 100%; }
 
 :host([data-theme="dark"]) {
   --primary-color: rgb(70, 8, 8);
@@ -18,19 +19,13 @@
   --grid-active-color: rgb(87, 24, 24);
   --grid-visited-color: rgb(211, 145, 178); }
 
-#configContainer {
-  background-color: var(--transparent-bg-color); }
-  @media (max-device-width: 1024px) {
-    #configContainer {
-      width: 60%; } }
-  @media (min-device-width: 1025px) {
-    #configContainer {
-      width: 35%; } }
-
 label,
 button,
 div {
   color: var(--font-color); }
+
+#configContainer {
+  background-color: var(--transparent-bg-color); }
 
 .bg-standard {
   background-color: var(--secondary-color); }
