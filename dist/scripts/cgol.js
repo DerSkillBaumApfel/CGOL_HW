@@ -156,16 +156,16 @@ class CgolGameLogic {
                 console.log("Element was not in active div collection.");
             }
             if (creationPhase) {
-                element.style.backgroundColor = "let(--grid-color)";
+                element.style.backgroundColor = "var(--grid-color)";
             }
             else {
-                element.style.backgroundColor = "let(--grid-visited-color)";
+                element.style.backgroundColor = "var(--grid-visited-color)";
             }
         }
         else {
             this.virtualGameboard[xCoordinate][yCoordinate] = 1;
             this.activeDivs.push(element);
-            element.style.backgroundColor = "let(--grid-active-color)";
+            element.style.backgroundColor = "var(--grid-active-color)";
         }
     }
     startGame() {
